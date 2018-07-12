@@ -13,5 +13,5 @@ Description: Pathifier is an algorithm that infers pathway deregulation
         into pathway-level information, generating a compact and
         biologically relevant representation of each sample.
 License: Artistic-1.0
-Imports: R.oo, princurve
+Imports: R.oo, princurve (>= 2.0.4)
 biocViews: Network

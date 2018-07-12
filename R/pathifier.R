@@ -57,14 +57,14 @@ function(x,m,ranks,calcerr=FALSE,thresh = 0.0005,maxit=200,start,logfile = "")
 		start <- aggregate(x, by=list(ranks), FUN=mean)
 		start <- as.matrix(start[,-1])
 	}	
-	c<-principal.curve(x, ranks, start=start, thresh=thresh, maxit=maxit, plot.true=FALSE)
+	c<-principal_curve(x, start=start, thresh=thresh, maxit=maxit)
 	}	
 	if (!is.null(c)) {
-		d[c$tag[1]]=0
+		d[c$ord[1]]=0
 		for (j in 2:m) {			
-			d[c$tag[j]]<-d[c$tag[j-1]]+dist(c$s[c$tag[(j-1):j],])
+			d[c$ord[j]]<-d[c$ord[j-1]]+dist(c$s[c$ord[(j-1):j],])
 		}		
-		d=d/d[c$tag[m]]		
+		d=d/d[c$ord[m]]
 		if (calcerr) {
 			e<-matrix(0,1,k)
 			for (i in 1:k) {	
@@ -220,7 +220,7 @@ function(data, allgenes, syms, pathwaynames, normals = NULL, ranks = NULL, attem
 						cat(file=logfile,append=TRUE,'skipping pathway ',i,'\n')
 					} else {
             ind<-c(ind,i)
-						si<-list(res$score,pathway,res$sig,res$origsig,res$k,res$thecurve$s,res$thecurve$tag,res$z,res$isin,xm,xs,t$center,t$rotation,k2)					
+						si<-list(res$score,pathway,res$sig,res$origsig,res$k,res$thecurve$s,res$thecurve$ord,res$z,res$isin,xm,xs,t$center,t$rotation,k2)
 					}
 				}
 			}
